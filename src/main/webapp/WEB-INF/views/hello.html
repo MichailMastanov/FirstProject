@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1>Hello, Mixa!</h1>
+
+<table>
+    <tr th:each="user : ${xxx}">
+        <td><p>id : </p></td>
+        <td th:text="${user.id}"></td>
+        <td><p>name : </p></td>
+        <td th:text="${user.username}"></td>
+        <td><p>password : </p></td>
+        <td th:text="${user.password}"></td>
+        <td><p>role : </p></td>
+        <td th:text="${user.authoritiesString()}"></td>
+
+        <td >
+            <form th:action="@{update}" method="GET" th:object="${user}">
+                <input type="hidden" name="id" th:value="${user.id}"/>
+                <input type="hidden" name="username" th:value="${user.username}"/>
+                <input type="hidden" name="roles" th:value="${user.authorities}">
+                <input type="hidden" name="password" th:value="${user.password}"/>
+                <input type="submit" value="Update" />
+            </form>
+        </td>
+
+        <td >
+            <form th:action="@{delete}" method="GET">
+                <input type="hidden" name="id" th:value="${user.id}" />
+                <input type="submit" value="Delete" />
+            </form>
+        </td>
+
+    </tr>
+</table>
+
+<a href="/new"> NEW USER </a>
+
+<form th:method="GET" th:action="@{/logout}">
+    <button type="submit">Logout</button>
+</form>
+
+</body>
+</html>

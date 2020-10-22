@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Update Person</title>
+</head>
+
+<body>
+
+<table>
+    <tr th:each="user : ${upUser}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:text="${user.getAuthorities()}"></td>
+</table>
+<form th:method="GET" th:action="@{/up_user}" th:object="${upUser}">
+    <label for="username">Enter name: </label>
+    <input type="text" th:field="*{username}" id="username"/>
+    </br>
+    <label for="password">Enter lastName: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+    </br>
+    <select multiple size="2" name="authorities" >
+        <option value="ADMIN">ROLE_ADMIN</option>
+        <option selected="selected" value="USER">ROLE_USER</option>
+    </select>
+    </br>
+    <input type="hidden" th:field="*{id}" id="id"/>
+    </br>
+    <input type="submit" value="Update!">
+</form>
+
+<form th:method="GET" th:action="@{/logout}">
+    <button type="submit">Logout</button>
+</form>
+
+</body>
+</html>
